@@ -1,0 +1,697 @@
+lunch instance  ---redhat machine
+[root@ip-172-31-37-34 ~]# yum update -y
+[root@ip-172-31-37-34 ~]#useradd redhat
+[root@ip-172-31-37-34 ~]#passwd redhat
+password : 1234
+[root@ip-172-31-37-34 ~]#vi /etc/ssh/sshd_config
+[root@ip-172-31-37-34 ~]#visudo
+[root@ip-172-31-37-34 ~]#service sshd restart
+[redhat@ip-172-31-37-34 ~]$sudo su -
+last login
+[redhat@ip-172-31-37-34 ~]$exit
+==================================================================
+20:00   day 02
+----- basics commands -----
+cli ---> system adm commands
+pwd 
+whoami
+sudo su -    switch to team
+ls
+ls -l
+ip addr show
+free
+free -m  ---> readable format
+df  ---> disk free
+df -h  --> human readable format
+cat   ---> read the file
+cat /etc/hosts
+findmnt   ---> mount show
+work with bash shell  ---> default
+tab
+history  --> if u use this previous cmd
+!f  ---> lready u use previous cmd show this 
+!458  ---> clear
+ctrl + r click ---> reverse-i-search : /etc/hosts/
+enter
+this reverse cmd  use this
+ps aux  --> show lot system
+ps aux | less  --> less show but if u exist this q enter
+ps aux | wc  ---> word count
+redirection    ---> its override
+----------
+ls > lsfiles
+not display the content but use cat
+cat lsfiles
+display the content
+whoami > lsfiles
+not display the content but use cat
+cat lsfiles
+display the content
+append   ----> its not override and its just add
+------
+ls >> lsfiles
+cat lsfiles
+ls uyuy
+cannot access 
+ls uyuy > lsfiles
+cannot access
+ls uyuy 2> errors   ---> this redirect
+cat errors
+cannot access
+ls *
+display all 
+ls * uyuy
+ls * uyuy 2> errors
+ls kjhjjh 2> /dev/null
+ls kjhjjh * 2> /dev/null
+enviroment variable
+------------------
+env     ----> all display but outside come q enter
+env | less
+alias   ---> display alias all
+alias h=history  ---> not permanent alias
+input /output redirection  & piping
+-----------------------------------  46:16
+standardout first | standardin second ---> this backend work
+ls /etc
+ls -l /etc
+ls /etc/  > etcfile 
+-----------------------------
+less etcfile
+tab ---> it will go
+enter click it will show all
+space ---> jump
+q ---> come out
+-----------------------------
+grep -R linuxteam /etc  ---> search word or file or folder
+grep -R linuxteam /etc 2> /dev/null  ---> not show  errors
+ls -l /etc/ | grep host  ----> search host and display permission
+
+file system hyrica    (fsh)  ---- /
+------------------
+[root@ansiblecontrol ~]#cd ..
+[root@ansiblecontrol /]#pwd
+/
+[root@ansiblecontrol /]#ls
+[root@ansiblecontrol /]# ls -l
+[root@ansiblecontrol /]#cd boot/
+[root@ansiblecontrol /]#ls -lrt
+[root@ansiblecontrol /]#ls
+[root@ansiblecontrol /]#cd /etc
+[root@ansiblecontrol /]#cat passwd
+[root@ansiblecontrol /]#cat redhat-release
+[root@ansiblecontrol /]# cat os-release
+[root@ansiblecontrol /]#cd /home/
+[root@ansiblecontrol /]#ls -lrt
+[root@ansiblecontrol /]#useradd example
+[root@ansiblecontrol /]#ls
+[root@ansiblecontrol /]#cd /usr/
+[root@ansiblecontrol /]#ls
+[root@ansiblecontrol /]#cd /var
+[root@ansiblecontrol /]#ls -lrt
+[root@ansiblecontrol /]#cd log
+[root@ansiblecontrol /]#less message
+===================================================
+------------ use man pages -----------1:01:30
+[root@ansiblecontrol log]#man man
+[root@ansiblecontrol /]#man reboot
+[root@ansiblecontrol /]#man -k user
+[root@ansiblecontrol /]# man -k user |grep useradd
+[root@ansiblecontrol /]#man appropos
+[root@ansiblecontrol /]#mandb
+====================================================
+------------- vi & vim editor ----------1:080:00
+insert mode ----> read, write,  ----> i,I,a,A
+i ---> insert mode
+shift + i ----> insert begining of the line 
+a ---> insert right side move one word
+shift + a ---> insert total content end side move
+command mode  ------> delete manicalipate  --->esc
+shift + o ---> enter its create new line and enter the content.
+:w newfile-backup ---> this content move the new file.
+:e! ---> discard unsaved change  (if u modified large file content 
+u dont know wt u change u can try this cmd unsaved come back originally file).
+:sh ---> enter this come in outside wt u required that copy any ctrl + d enter go back 
+vi editor insert mode paste  after  :wq (switch to shell).
+x ---> delete right side character one by one enter and delete.
+shift + x ---> delete left side character one by one enter and delete.
+dw ---> delete part of word right side
+dd ---> delete entery line
+shift + d ---> delete that cursor right side line content
+d + G --->where the cursor stay that line bottom of the content delete entery
+d1 + G ---> where the cursor stay that line above of the content delete entery 1:30:00
+:set nu ---> set number line to line numbers
+:11,15d ---> delete the lines 11 12 13 14 15 
+shift + g ---> last line go to cursor
+1 G ---> first line go to cursor
+90 G ----> go to 90  line
+65 G ---> go to 65 line 
+L ---> display screen line  last
+H ---> display screen line first
+M ----> display middle line 
+cc  ---> change the content and insert mode 
+shift + c ---> where cursor stay that line right side change the content and insert mode is there.
+shift  + j ---> already seperate two lineu can use this cmd combine.
+u ---> undo 
+yy ---> copy this line  ---> yanking
+p --> paste what the  content
+5 yy ---> copy 5 lines
+:1,5 co 12 ---> 12345 lines copy and after 12 lines paste like 13th line.
+:17 m 1o  ---> 17 line move the 10th line enter
+:set nonu ---> remove numbers
+/map ---> where the map  name show the cursor
+?map ---> name show the cursor
+:set ic  ----> ignore the /map find the all map
+:set noic ---> no ignore
+:%s/map/MAP/ ---> all small map convert capital MAP  -- :%s/old/new/
+:s/MAP/map  ---> where the cursor stay that line that MAP convert map only one starting map that line
+:s/MAP/map/g ----> where the cursor stay that line MAP convert map 
+n ---> continue at bottom
+N ---> continue at top
+exit mode  ---->:wq, :w, :q
+========================================================================================
+======================= day 3 =============================================== 1:56:00
+--------------- FILE MANAGEMENT TOOL ----------------------------------------
+mkdir tre
+mkdir -p /tre/sub/sub1/sub2  ----> created all folder to folder
+cp ttt* tre/ ---> cp src dest ---> copy file to past dest
+cp -r sub/sub1/ .   ----> copy folder
+mv ttt* sub1/  ---> move the file
+mv sub1/ newsub  ---> rename folder
+rmdir folder ---> delete only empty folder
+rm  -r newsub  ---> delete but ask yes enter after deleted
+rm -rf newsub  ---> delete force fully
+
+---------------- FINDING FILES -------------------------------2:11:00
+which useradd ---> binary 
+echo $PATH ----> 
+locate useradd  ----> updatedb  cronjob run  (only datebase update that time display or use after not working)
+find / -name "host*"   ----> all display , only use name that name display
+find / -type f -size +100m  ---> display file and errors
+find / -type f -size +100m 2> /dev/null  ---> ignore errors only display file 
+find /var -type f -size +100m 2> /dev/null  ---> only vars display
+find / -user linuxteam  ---> check
+find /etc -exec grep -l linuxteam {} \; 2>/dev/null
+grep -l linuxteam /etc/* 2>/dev/null
+
+--------------------- UNDERSTANDING MOUNTS ----------------2:24:00
+means ---> directory connect to the access this is mounting the device
+/BOOT   /DEV   /USER   /bin   /
+--------------------WORKING WITH TAR ------------------2:26:49
+tar  ----> tape   archieve
+tar cvf myarchive.tar  /home /etc --->all files in one tar file
+tar -xvf myarchive.tar  ----> one tar file extended all files
+gzip myarchive.tar  ---> regular use this    --->10m
+gunzip myarchive.tar.gz --->  unzip file use this cmd
+gzip -k myarchive.tar   ---> create another gz file use -k  --->9mb
+bzip2 -k myarchive.tar  ----> create bz2 file      --->8mb
+xz  myarchive  ----->   create xz file ---> 7.5mb
+
+---------------- linux links ----------------------------2:39:00****
+in /root/TESTLINK/testlinkfile testfile123   ---> backup file 
+ls -li
+528072  testlinkfile 
+528072  testfile123
+528073  file1
+in /root/TESTLINK/testlinkfile testfile123   /dev
+invalid 
+in -s file1 file2  ---->
+echo "welcome india" > file4
+in -s file4 file5
+mv  file5 /tmp  ---> 2:51:15*****
+in /root/TESTLINK/testlinkfile/ test 
+hard link not allowed for directory
+in -s /root/TESTLINK/testlinkfile/  test  ----> created
+
+----------------------- LAB EXERCISES --------------------- 2:53:51
+
+====================== DAY 4 ================================
+--------------------- TEXT FILES ------------------------2:58:00
+more /etc/passwd  -------> more one side down bottom
+vi morefile  (1...50)
+more morefile
+less morefile  ----> advance ---> *******
+head -n 10 morefile
+head -n 10 morefile | tail -n 1
+tail -n 5 morefile
+tail -f /var/log/messages ---> realtime date update display this
+cat -A /etc/hosts  ----> display the $content
+cat -b  /etc/hosts  ----> display number with content
+cat -s /etc/hosts  ---->   spaces display  -- repeated empty output lines
+tac space  ----> cat ki reverse
+cut -f 3 -d : /etc/passwd | less   -----> filter
+cut -f 3 -d : /etc/passwd | grep -i ansibleusr
+cut -f 3 -d : /etc/passwd | grep -i 1003
+cut -f 3 -d : /etc/passwd | sort | less
+cut -f 3 -d : /etc/passwd | sort -n | less
+cut -f 3 -d : /etc/passwd | sort | tr [:lower:] [:upper:]
+ps aux | grep ssh
+ps aux | grep Ssh  ---> not display
+ps aux | grep -i Ssh  ---> display all small letter
+grep linuxteam * 2>/dev/null
+grep -A5 linuxteam /etc/passwd  ---> bottom 5 lines display
+grep -B5 linuxteam /etc/passwd  ---> top 5 lines display
+----------------- REGULAR EXPRESSION ----------------3:15:20
+regular expression --> text patterns  -- grep vi awk sed  grep'a'
+cat regex
+grep 'b.t' regex
+grep 'b.*t' regex
+grep 'bo*t' regex
+grep 'b.?t' regex  ---> advacne ? not display 
+egrep 'b.?t' regex  --. display
+------------- awk, sed -------- 3:21:26 ********
+data extraction, repeating in scripting
+awk -F : '/linuxteam/ {print $4 }' /etc/passwd   ---> display 1001
+awk -F : '/ansibleusr/ {print $4 }' /etc/passwd
+ls -l /etc/ | awk '/pass/ { print }'
+ls -l /etc/ | grep pass
+vi sedfile  (one......five)
+cat sedfile
+sed -n 4p sedfile
+sed -i s/four/FOUR/g sedfile  ---> four convert FOUR display
+sed -n 4p sedfile
+sed -i -e '4d' sedfile ---> delete 
+sed -n 4p sedfile
+
+=============================================================================
+========================== day 5 ===================================
+---- CONNECTING SERVER, ROOT USER, CONSOLE, VT ------------ 3:29:00
+ssh linuxteam@172.31
+su -     --->  complete another user 
+su - ansibleusr   ----> switch user
+ ask password : 
+sudo        ---> 3:40:00
+vi sudo  
+#to shutdown the system
+India	 ALL=/usr/sbin/useradd  -->:wq
+useradd India     passwd India   password : 1234
+su - India
+$id
+$sudo useradd Dummy 
+ask password : 1234
+change the password  in dummy
+$passwd Dummy  ---> sry, user India is not allowed to execute '/bin/passwd' as root as ansiblecontrol
+exit  ---> previous root switch 
+#usermod -aG wheel India ---> add wheel India
+id India
+su - India
+$id
+change passsword 
+sudo passwd Dummy   ----> permission is ok
+ask password
+----------------------------------
+ssh localhost
+ssh username@ip
+=============================================================================================
+------------ day 6 --------------------------------3:50:00
+------------- USER MANAGEMENT ---------------------
+user properties
+bob		:	x	:	1000	:	9000	: empty		: /home/directory : /bin/bash
+user 	:password:uniqe id :group id 	:non matter :				:
+usermod  --help | less
+useradd  -c "this user is Developer" newuser1 ---> created user
+useradd -D    -----> default properties display
+usermod  --HELP | less
+usermod -aG wheel newuser1
+userdel India  ---> delete user but not delete home directory India
+userdel -rf India   --> delete user directory
+passwd --help 
+useradd newuser2cat 
+passwd -l newuser2  ---> passsword locked
+passwd -u newuser2  ---> passsword unlocked
+----------- manage default setting ----------------------- 4:04:30
+cat /etc/default/useradd
+vi /etc/login.defs  -----> real time important *******************
+cd /etc/skel ---> skel mean hidden files is srouce every file create the hidden file generate
+ls -la
+-----------manage users groups ---------------4:11:00
+/etc/shadow ---->password properties
+/etc/passwd  ----> user properties
+/etc/group   ---->
+cat /etc/group | grep -i wheel
+groupadd sales
+groupdel sales
+lid -g wheelusermod -aG wheel newuser2
+lid -g wheel
+grep wheel /etc/group
+----- passwd properities  -----
+chage newuser1  ----> ask password length change year expire  inactive
+grep newuser1 /etc/shadow
+---------- class lab ---------------------
+==============================================================================
+===================== day 7 ================================================
+------------ linux permission ---------------------------------- 4:29:00
+r - 4,  w - 2, x - 1   &  u - user,  g - group,  o - other & + - add,  - - remove,  = - equal
+---------------------------------------------------------------------------------------------
+touch testfile
+chown testuser1  testfile   ----> another root user change ownership go to testfile
+ls -lrt
+chgrp testuser1  testfile  ----> another group root user change ownership
+ls -lrt 
+chown root:root testfile
+ls -lrt
+umask --->022-666 = 644  ---> umask is default if change 
+--------->umask-create file permission == result
+umask 027  ---> 027-666=640 change default permission
+touch file1
+ls
+vi /etc/profile  ---> umask stay this place in profile
+useradd tier1
+vi /home/tier1/.bash  -------> change umask permission
+insert umask 027    :wq  ---> 
+su - tier1
+$touch dummyfile
+ls -lrt
+umask
+--------------- special permission ----------------
+suid    ---> run as owner
+sgid    ----> group owner
+sb
+mkdir exampledir
+chown  :example exampledir/
+ls -lrt ---> check 
+lid -g example
+su - tier1
+$cd /home/exampledir
+touch testfile1
+ls -lrt
+exit
+su - tier2  -----> 4:50:00  repeat class
+--------- ACL --ACCESS CONTROL LIST ---------4:55:00
+get facl
+set facl
+getfacl  sales  ---> display details properities sales
+setfacl -m d:g:account:rx sales  ---> sales ki account oka group permission kuda echanu
+ls -l ---> display + symbol is succes check 
+getfacl sales/  ----> this type of also check 
+
+------------ troubleshooting -------------5:04:00
+cd /home/linuxteam
+touch root1
+touch root2
+su - linuxteam 
+$ls -ld --> check permission
+exit
+touch randomfile
+chown linuxteam:linuxteam randomfile
+chmod 006  randomfile
+ll
+=========================================================================================
+================== day 08 =====================================
+------------------ NETWORKING -------------------------------- 5:13:00
+ipv4 n/w  ---> ip address  default router, gateway -->provide
+ipv6  ----> not use highly 
+ip addr show  ----> display ip address
+ip link show
+ip link
+ip -s link show ---> display errors drawback troubleshoting is easy
+ip addr add dev etho 10.0.0.0/24 
+ifconfig
+ip addr show  ---> add is suucess to display show
+ping 10.0.0.10  ---> run this
+ip route show
+ping 8.8.8.8
+ip route del default via 172.31.32.1  ---> outside come server
+ping 8.8.8.8  ---> restart machine
+ip route
+ip route add default via 172.31.32.1
+ip route
+cat /etc/resolv.conf
+------------N/W MANAGER CLI ------------
+systemctl status NetworkManager  ---> check status
+man nmcli-examples
+nmcli
+rpm -qa | grep -i bash-completion   ---> see bash
+nmcli  
+rpm -qa | grep -i bash-completion   ---> see bash
+exit
+sudo su -
+#nmcli ---> see this now
+nmcli connection add  ----> see name 
+nmcli connection add  con-name ethernet-test ifname
+nmcli connection add  con-name ethernet-test ifname eth0
+nmcli connection add  con-name ethernet-test ifname eth0 ipv4.address 192.168.4.108/24 ipv4.gateway 192.168.4.2 ipv4.dns 8.8.8.8 type
+nmcli connection add  con-name ethernet-test ifname eth0 ipv4.address 192.168.4.108/24 ipv4.gateway 192.168.4.2 ipv4.dns 8.8.8.8 type ethernet
+nmcli connection add  con-name ethernet-test ifname eth0 ipv4.address 192.168.4.108/24 ipv4.gateway 192.168.4.2 ipv4.dns 8.8.8.8 type ethernet
+-------> add successfully
+nmcli connection
+nmcli connection up ethernet-test  ---> activited
+nmcli connection up System\ eth0
+nmtui ---> test user interface like vi   --> 5:50:00
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+vi /etc/sysconfig/network-scripts/ifcfg-ens3
+ping -f google.com
+ping -f localhost
+yum install dig   ---> errors use below cmd
+yum install bind-utils
+dig trietreetech.com
+=================================================================================================================================================
+=================================== day 10 ======================================================
+-------------------------------PROCESS  JOB  --------------------------------------------------- 6:00:00
+jobs and process, jobs work process, ps cmd, memory usage, cpu load, top cmd ********* interview linex section
+----------------
+jobs ---> process id --> pid
+background work use cmd & 
+-----------------------------
+while true; do true; done &  ---> display background run number
+while true; do true; done &
+dd if=/dev/zero of=/dev/null
+ctrl z --> stopped
+bg   -----.   start running
+jobs  ---> display the running jobs
+fg 3 --->kill
+jobs
+fg 1   ------>kill 
+jobs
+ps   ---> check run
+ps -l   ---->
+ps -L    --->  
+ps aux
+ps aux | less
+ps -fax  ----> display parent & children 
+ps -fax | less       *******************8
+ps -fU ansibleusr
+ps -f --forest -C sshd
+ps -eo pid
+ps  -eo pid, ppid, user,cmd | less
+------- MEMORY USAGE --------------------6:16:00
+free -m
+uptime
+dd if=/dev/zero of=/dev/null
+watch uptime
+lscpu
+top    ---> details check load   *******************
+fg 1
+top
+some cmd missing repeat video
+-------------- SINGALS ------------------- 6:31:00
+KILL 1880
+KILL -9 1880  ----> force full killed dont use real time -9
+ps aux | grep dd
+ps aux | grep '<dd'
+killall dd
+------ manageing priority ------------- 6:41:00
+dd if=/dev/zero of=/dev/null &
+dd if=/dev/zero of=/dev/null &
+top
+rn enter -- renice see --->
+nice -n -5 dd if=/dev/zero of=/dev/null &
+top
+renice -n 0 2630
+service tuned status
+tuned-adm list    ------------> *****************
+tuned-adm profile desktop
+tuned-adm active
+=============================================================================================
+================= day 10 ================================================ 6:52:00
+================== SOFTWARE MANAGEMENT ============================= 
+yum search nmap
+yum install nmap
+yum remove nmap
+yum update kernal
+yum search sepolicy
+yum provides */sepolicy
+yum info nmap
+yum list nmap
+---------- modulus ---------------------
+yum modulus list
+yum modulus list | less
+yum modulus provides http
+yum modulus info --profile php
+yum modulus info --profile php:7.1
+yum modulus info --profile php:7.4
+yum modulus install php:7.4
+yum update
+yum modulus install php:7.3   ----> previous install 7.4 switch the  7.3 (recommended to remove not possible use below cmd)
+yum modulus reset  php:7.3
+yum modulus install php:7.3  
+-------------------- yum groups ---------------------- 7:18:00
+yum groups list
+yum groups info 'Devlopement Tools'
+yum groups install "Devlopement Tools"
+yum groups install --with-optional  "Devlopement Tools"
+---------------- yum history  ----------------7:21:00
+yum history 
+yum history undo 11
+yum history undo 12 ---> i want install 
+----------- rpm ------------- 
+rpm -qf sudo.conf
+rpm -ql sudo 
+rpm -qc sudo
+yum install dnf-utils -y
+yumdownloader httpd
+rpm -qp --scripts httpd-2.4.3......................
+-------------- subscrption --------------------7:28:00
+===============================================================================================================================
+===================== day 11 ==================================================7:30:00
+-------------- systemd ---------------------------------------
+systemctl 
+systemctl -t help
+systemctl list-unit-files   --->display all
+systemctl list-unit-files | grep  -i enable
+systemctl list-unit-files | grep  -i enable | grep sshd
+systemctl list-unit-files | grep  -i enable | grep http
+systemctl list-unit-files | grep  -i enable | grep vsftpd
+systemctl status vsftpd
+systemctl stop vsftpd
+systemctl status vsftpd
+systemctl  enable vsftpd
+systemctl status vsftpd
+systemctl start vsftpd
+systemctl cat vsftpd.service
+systemctl 
+systemctl  show vsftpd.service
+systemctl  edit vsftpd.service  ---> 7:44:00
+systemctl  
+systemctl  daemon-reload
+systemctl status vsftpd
+systemctl restart vsftpd
+killall vsftpd
+systemctl status vsftpd
+systemctl 
+systemctl  edit vsftpd.service  ---> 7:46:30
+systemctl  
+systemctl  daemon-reload
+systemctl status vsftpd
+systemctl restart vsftpd
+killall vsftpd
+systemctl status vsftpd
+=================================================================================================
+=============== day 12 ======================== 7:50:00
+------------- cron & at ----------------------
+cron is demon ----> like regular job
+cron is use the  backup
+at is use the  at a time
+systemd alternate cron
+do not use /etc/crontab
+anacron 
+use the crontab -easy
+7:59:00   ********** interview stdout --->
+vi /etc/cron
+cd /etc/cron.d
+
+
+at teatime 
+ctrl d ----> come outside
+atq  ---> which jobs ruuning
+atrm ---> remove job is running
+------------------ scheduler  temporory file -----------------
+cd usr/lib/tmpfiles.d/
+ll
+vi var.conf
+systemctl cat systemd-tmpfiles-clean.timer
+cp /usr/lib/tmpfiles.d/tmp.conf  /etc/tmpfiles.d/
+cd /etc/tmpfiles.d/  
+ll
+8:15:10----> repeat class
+
+
+
+==========================================================================================
+============================ day 12 ==================================================
+----------------------------- logging ----------------------------------- 8:21:00
+vim /etc/rsyslog.conf
+vi /etc/systemd/journald.conf
+journalctl
+journalctl UNIT=sshd
+systemctl start httpd
+systemctl status httpd
+mkdir /var/log/journal
+systemctl restart systemd-journald
+systemctl status systemd-journald
+vi /etc/logrotate.d/
+vi /etc/logrotate.d/httpd
+vi /etc/logrotate.conf
+====================================================================================
+=============================== day 13 ============================= 8:38:00
+===================== storage ======================================
+lsblk
+cd /dev
+ls -l sda*
+cat /proc/partitions
+--------- storage partitions ------------  class repeat 9:00:00
+rh8 --> stratis --> acess through api ---cloud  ****************
+vdo --> virtual data optimizion
+gpt   ---> guid partion table  ---> overcome limitition
+mbr --> master boot restart --> old 4 partion
+how to create partion?
+lsblk
+parted
+parted /dev/sdb
+(parted) mkpart one 1MiB 1000MiB
+(parted) quit
+lsblk
+fdisk /dev/sdc    --->
+lsblk  ---> check
+mkfs.xfs /dev/sdc5
+mkfs.xfs /dev/sdc6   
+
+
+------ systemd use manage mounts --------------- 9:13:00
+how to create .mount files ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
