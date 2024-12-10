@@ -1,0 +1,12 @@
+connect ec2
+linux 2
+http
+https
+ssh
+all trafice
+root@ip-172-31-91-110 ec2-user]# sudo su
+root@ip-172-31-91-110 ec2-user]# yum install docker
+after install docker 
+root@ip-172-31-91-110 ec2-user]# hostnamectl set-hostname master
+[root@ip-172-31-91-110 ec2-user]# bash
+[root@master ec2-user]# 
